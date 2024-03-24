@@ -3,10 +3,7 @@ $db_name='mysql:host=localhost;dbname=icecream_db';
 $user_name='root';
 $password='';
 $conn=new PDO($db_name,$user_name,$password);
-if($conn){
-    echo "Connected";
-}
-else{
+if(!$conn){
     echo "Not Connected";
 }
 function unique_id(){

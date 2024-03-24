@@ -20,31 +20,34 @@ if (isset($_POST['submit'])) {
     $rename = unique_id() . "." . $ext;
     $image_size=$_FILES['image']['size'];
     $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = "../images/";
+    $image_folder = '../uploaded_files/' . $rename;
     $select_seller=$conn->prepare("SELECT * FROM sellers WHERE email=?");
     $select_seller->execute([$email]);
-    if($select_seller->rowCount()==0){
+    if($select_seller->rowCount()>0){
+        $warning_msg[]='Email already exists';
+    }else{
         if ($pass == $cpass) {
             if ($ext == 'jpg' || $ext == 'png' || $ext == 'jpeg') {
-                if ($image_size < 1000000) {
-                    $insert_seller = $conn->prepare("INSERT INTO sellers(name,email,password,image) VALUES(?,?,?,?)");
-                    $insert_seller->execute([$name, $email, $pass, $rename]);
-                    move_uploaded_file($image_tmp_name, $image_folder . $rename);
-                    $success_msg[] = "Seller registered successfully";
+                if ($image_size < 5000000) {
+                    $insert_seller = $conn->prepare("INSERT INTO sellers(id,name,email,password,image) VALUES(?,?,?,?,?)");
+                    $insert_seller->execute([$id, $name, $email, $cpass, $rename]);
+                    if ($insert_seller) {
+                        move_uploaded_file($image_tmp_name, $image_folder );
+                        $success_msg[] = 'Registration successful';
+                    } else {
+                        $error_msg[] = 'Registration failed';
+                    }
                 } else {
-                    $error_msg[] = "Image size is too large";
+                    $error_msg[] = 'Image size too large';
                 }
             } else {
-                $error_msg[] = "Image format is not supported";
+                $error_msg[] = 'Invalid image format';
             }
         } else {
-            $error_msg[] = "Password does not match";
-        }
+            $error_msg[] = 'Passwords do not match';
     }
-    else{
-        $error_msg[]="Email already exists";
-    }
-}
+}}
+
 
 ?>
 
