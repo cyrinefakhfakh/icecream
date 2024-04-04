@@ -12,7 +12,7 @@
     --space:2rem;
     --main-color:#da6285;
     --pink-color:#ff8e9d;
-    --pink-opacity:#ffe6e6;
+    --pink-opacity:#ffe6e9;
     --white-alpha-40:rgba(255,255,255,0.40);
     --white-alpha-25:rgba(255,255,255,0.25);
     --backdrop-filter:blur(5px);
@@ -289,8 +289,7 @@ header .right{
     display: flex;
     
 }
-#user-btn,
-    .toggle-btn{
+#user-btn , .toggle-btn{
         font-size: 2rem;
         padding: .5rem;
         color:var(--pink-color);
