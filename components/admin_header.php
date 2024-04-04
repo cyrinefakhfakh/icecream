@@ -53,7 +53,7 @@
                 <div class="navbar">
                     <ul>
                         <li><a href="dashboard.php"><i class="bx bxs-home-smile"></i>Dashboard</a></li>
-                        <li><a href="products.php"><i class="bx bxs-shopping-bags"></i>Add products</a></li>
+                        <li><a href="add_products.php"><i class="bx bxs-shopping-bags"></i>Add products</a></li>
                         <li><a href="view_product.php"><i class="bx bxs-food-menu"></i>View products</a></li>
                         <li><a href="user_accounts.php"><i class="bx bxs-user-detail"></i>Accounts</a></li>
                         <li><a href="../components/admin_logout.php"><i class="bx bx-log-out"></i>Logout</a></li>

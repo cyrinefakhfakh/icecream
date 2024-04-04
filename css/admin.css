@@ -22,7 +22,6 @@
 body{
     background-image: url('../image/bg1.png');
     background-size: cover;
-    background-repeat: no-repeat;
 
     
 
@@ -89,7 +88,7 @@ input[type='submit']:hover{
     
 }
 .box-container{
-    display:grid;
+    display: grid;
     grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
     align-items: center;
 
@@ -350,7 +349,7 @@ header .right{
 .sidebar{
     background-color: var(--white-alpha-25);
     backdrop-filter:var(--backdrop-filter);
-    padding-top: 5rem;
+    padding-top: 6rem;
     width:18vw;
     height:100vh;
     position: sticky;
@@ -475,3 +474,20 @@ header .right{
     section{
         width:100%;
         }    }
+/*dashboard*/
+.dashboard .box-container .box{
+    text-align: center;
+    border-radius: .5rem;
+    padding: 1.5rem;
+    padding-bottom: 3rem;
+}
+.dashboard .box-container .box h3{
+    font-size: 2.7rem;
+    margin-bottom: -1rem;
+}
+.dashboard .box-container .box p{
+    font-size: 1.8rem;
+    padding: 1rem;
+    text-transform: capitalize;
+    margin: 1rem 0;
+}
