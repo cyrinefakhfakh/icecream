@@ -475,11 +475,22 @@ header .right{
         width:100%;
         }    }
 /*dashboard*/
+.dashboard .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    align-items: center;
+    
+}
 .dashboard .box-container .box{
     text-align: center;
     border-radius: .5rem;
     padding: 1.5rem;
     padding-bottom: 3rem;
+    background-color: var(--white-alpha-25);
+    border:2px solid var(--white-alpha-40);
+    backdrop-filter: var(--backdrop-filter);
+    box-shadow: var(--box-shadow) ;
+    margin:1rem ;
 }
 .dashboard .box-container .box h3{
     font-size: 2.7rem;

@@ -4,7 +4,7 @@
     </div>
     <div class="right">
         <div class="bx bxs-user" id="user-btn"></div>
-        <div class="toggle-btn" ><i class="bx bx-menu"></i></div>
+        <div class="toggle-btn" ><i class="bx bxs-menu"></i></div>
 
     </div>
     <div class="profile-detail">
