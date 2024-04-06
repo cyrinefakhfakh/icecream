@@ -99,6 +99,7 @@ input[type='submit']:hover{
     backdrop-filter: var(--backdrop-filter);
     box-shadow: var(--box-shadow) ;
     margin:1rem ;
+    border-radius: .5rem;
 }
 
 .heading{
@@ -501,4 +502,11 @@ header .right{
     padding: 1rem;
     text-transform: capitalize;
     margin: 1rem 0;
+}
+.show-post .box-container .box {
+    position: relative;
+    overflow: hidden;
+}
+.show-post .box-container .box:hover image{
+    transform: scale();
 }
