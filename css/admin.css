@@ -348,7 +348,7 @@ header .right{
 .sidebar{
     background-color: var(--white-alpha-25);
     backdrop-filter:var(--backdrop-filter);
-    padding-top: 6rem;
+    padding-top: 3rem;
     width:18vw;
     height:100vh;
     position: sticky;
