@@ -4,6 +4,20 @@ if (isset($_COOKIE['seller_id'])) {
 else{
     $seller_id='';
     header('location:loging.php');}
+    if(isset($_POST['delete'])){
+        $p_id=$_POST['product_id'];
+        $p_id=filter_var($p_id,FILTER_SANITIZE_STRING);
+
+        $delete_product=$conn->prepare("DELETE FROM products WHERE id=?");
+        $delete_product->execute([$p_id]);
+
+        $success_msg[]='Product deleted successfully';
+        
+    }
+
+
+
+
 ?>
 
 
@@ -39,14 +53,16 @@ else{
                 <?php 
                 if($fetch_products['image']!=''){
                 ?><img src="../uploaded_files/<?= $fetch_products['image']; ?>" class="image">
-                <?php}?>
+                <?php 
+            }
+            ?>
                 <div class="status" style="color: <?php if($fetch_products['status']=='active'){
                     echo 'limegreen';}else{echo 'coral';} ?>">
                     
                     <?= $fetch_products['status']; ?>
                 </div>
                 <div class="price">
-                    <p><?= $fetch_products['price']; ?></p>
+                    $<?= $fetch_products['price']; ?>/-
                 </div>
                 <div class="content">
                     <img src="../image/shape-19.png" class="shap">
@@ -54,7 +70,7 @@ else{
                     <div class="flex-btn">
                         <a href="edit_product.php?id=<?= $fetch_products['id']; ?>" class="btn">Edit</a>
                         <button type="submit" name="delete" class="btn" onclick="return confirm('delete this product');">Delete</button>
-                        <a href="read_product.php?id=<?= $fetch_products['id']; ?>" class="btn">Read product</a>
+                        <a href="read_product.php?id=<?= $fetch_products['id']; ?>" class="btn">Read</a>
                     </div>
                 </div>
             </form>

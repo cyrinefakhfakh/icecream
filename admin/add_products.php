@@ -1,108 +1,69 @@
-<?php include '../components/connect.php';
+<?php
+include '../components/connect.php';
+
 if (isset($_COOKIE['seller_id'])) {
-    $seller_id=$_COOKIE['seller_id'];}
-else{
-    $seller_id='';
-    header('location:loging.php');}
-    
-if (isset($_post['publish'])){
-    $id=unique_id();
-    $name=$_POST['name'];
-    $name=filter_var($name,FILTER_SANITIZE_STRING);
+    $seller_id = $_COOKIE['seller_id'];
+} else {
+    $seller_id = '';
+    header('location:loging.php');
+}
 
-    $price=$_POST['price'];
-    $price=filter_var($price,FILTER_SANITIZE_STRING);
+if (isset($_POST['publish']) || isset($_POST['draft'])) {
+    $id = unique_id();
+    $name = $_POST['name'];
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
 
-    $description=$_POST['description'];
-    $description=filter_var($description,FILTER_SANITIZE_STRING);
+    $price = $_POST['price'];
+    $price = filter_var($price, FILTER_SANITIZE_STRING);
 
-    $stock=$_POST['stock'];
-    $stock=filter_var($stock,FILTER_SANITIZE_STRING);
-    $status='active';
-    $image=$_FILES['image']['name'];
-    $image=filter_var($image,FILTER_SANITIZE_STRING);
-    $img_size=$_FILES['image']['size'];
-    $img_tmp_name=$_FILES['image']['tmp_name'];
-    $image_folder='../uploaded_files/'.$image;
-    $select_image=$conn->prepare("SELECT * FROM products WHERE image=? AND seller_id=?");
-    $select_image->execute([$image,$seller_id]);
+    $description = $_POST['description'];
+    $description = filter_var($description, FILTER_SANITIZE_STRING);
 
-    if (isset($image)){
-        if($select_image->rowCount()>0){
-            $warning_msg[]='image name repeated';
+    $stock = $_POST['stock'];
+    $stock = filter_var($stock, FILTER_SANITIZE_STRING);
 
+    $image = $_FILES['image']['name'];
+    $image = filter_var($image, FILTER_SANITIZE_STRING);
+    $img_size = $_FILES['image']['size'];
+    $img_tmp_name = $_FILES['image']['tmp_name'];
+    $image_folder = '../uploaded_files/' . $image;
+    $select_image = $conn->prepare("SELECT * FROM products WHERE image=? AND seller_id=?");
+    $select_image->execute([$image, $seller_id]);
+
+    if (isset($image)) {
+        if ($select_image->rowCount() > 0) {
+            $warning_msg[] = 'Image name repeated';
+        } elseif ($img_size > 20000000) {
+            $warning_msg[] = 'Image size is too large';
+        } else {
+            move_uploaded_file($img_tmp_name, $image_folder);
         }
-        elseif($img_size>20000000){
-            $warning_msg[]='image size is too large';
-        }
-        else{
-            move_uploaded_file($img_tmp_name,$image_folder);
-        }
-    }else{
-        $image='';
+    } else {
+        $image = '';
     }
-    if($select_image->rowCount() >0 AND $image!=''){
-        $warning_msg[]='image name repeated';
-    }
-    else{
-        $insert_product=$conn->prepare("INSERT INTO products(id,seller_id,name,price,image,stock,product_detail,status) VALUES(?,?,?,?,?,?,?,?)");
-        $insert_product->execute([$id,$seller_id,$name,$price,$image,$stock,$description,$status]);
-        $success_msg[]='product added successfully';
+
+    if ($select_image->rowCount() > 0 && $image != '') {
+        $warning_msg[] = 'Image name repeated';
+    } else {
+        if (isset($_POST['publish'])) {
+            $status = 'active';
+            $insert_product = $conn->prepare("INSERT INTO products(id, seller_id, name, price, image, stock, product_detail, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_product->execute([$id, $seller_id, $name, $price, $image, $stock, $description, $status]);
+            $success_msg[] = 'Product added successfully';
+        } elseif (isset($_POST['draft'])) {
+            $status = 'deactive';
+            $insert_product = $conn->prepare("INSERT INTO products(id, seller_id, name, price, image, stock, product_detail, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_product->execute([$id, $seller_id, $name, $price, $image, $stock, $description, $status]);
+            $success_msg[] = 'Product saved as draft';
+        }
+
         if ($insert_product->errorCode() !== '00000') {
             print_r($insert_product->errorInfo());
         }
     }
 }
-
-if (isset($_POST['draft'])){
-    $id=unique_id();
-    $name=$_POST['name'];
-    $name=filter_var($name,FILTER_SANITIZE_STRING);
-
-    $price=$_POST['price'];
-    $price=filter_var($price,FILTER_SANITIZE_STRING);
-
-    $description=$_POST['description'];
-    $description=filter_var($description,FILTER_SANITIZE_STRING);
-
-    $stock=$_POST['stock'];
-    $stock=filter_var($stock,FILTER_SANITIZE_STRING);
-    $status='deactive';
-    $image=$_FILES['image']['name'];
-    $image=filter_var($image,FILTER_SANITIZE_STRING);
-    $img_size=$_FILES['image']['size'];
-    $img_tmp_name=$_FILES['image']['tmp_name'];
-    $image_folder='../uploaded_files/'.$image;
-    $select_image=$conn->prepare("SELECT * FROM products WHERE image=? AND seller_id=?");
-    $select_image->execute([$image,$seller_id]);
-
-    if (isset($image)){
-        if($select_image->rowCount()>0){
-            $warning_msg[]='image name repeated';
-
-        }
-        elseif($img_size>20000000){
-            $warning_msg[]='image size is too large';
-        }
-        else{
-            move_uploaded_file($img_tmp_name,$image_folder);
-        }
-    }else{
-        $image='';
-    }
-    if($select_image->rowCount() >0 AND $image!=''){
-        $warning_msg[]='image name repeated';
-    }
-    else{
-        $insert_product=$conn->prepare("INSERT INTO products(id,seller_id,name,price,image,stock,product_detail,status) VALUES(?,?,?,?,?,?,?,?)");
-        $insert_product->execute([$id,$seller_id,$name,$price,$image,$stock,$description,$status]);
-        $success_msg[]='product saved as draft';
-    }
-}
- 
-
-
 ?>
+
 
 
 <!DOCTYPE html>
