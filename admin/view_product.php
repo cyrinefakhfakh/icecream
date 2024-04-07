@@ -53,9 +53,7 @@ else{
                 <?php 
                 if($fetch_products['image']!=''){
                 ?><img src="../uploaded_files/<?= $fetch_products['image']; ?>" class="image">
-                <?php 
-            }
-            ?>
+                <?php } ?>
                 <div class="status" style="color: <?php if($fetch_products['status']=='active'){
                     echo 'limegreen';}else{echo 'coral';} ?>">
                     
@@ -66,7 +64,7 @@ else{
                 </div>
                 <div class="content">
                     <img src="../image/shape-19.png" class="shap">
-                    <div class="title"><?fetch_products['name'];?></div>
+                    <div class="title"><?= $fetch_products['name'];?></div>
                     <div class="flex-btn">
                         <a href="edit_product.php?id=<?= $fetch_products['id']; ?>" class="btn">Edit</a>
                         <button type="submit" name="delete" class="btn" onclick="return confirm('delete this product');">Delete</button>
@@ -90,8 +88,10 @@ else{
 
 
         </section>
+        
 
 </div>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

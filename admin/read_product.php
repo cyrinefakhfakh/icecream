@@ -17,7 +17,9 @@ else{
             unlink('../uploaded_files/'.$fetch_delete_image['image']);
         }
 
-        
+        $delete_product=$conn->prepare("DELETE FROM products WHERE id=? AND seller_id=?");
+        $delete_product->execute([$p_id,$seller_id]);
+        header('location:view_product.php');
         
     }
 
