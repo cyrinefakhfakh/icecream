@@ -42,6 +42,7 @@ html{
     cursor: pointer;
     border-radius: 1.5rem;
     position:relative;
+    text-align: center;
 
 
 }
@@ -267,11 +268,15 @@ section,
     font-size: 1.3rem;
 }
 
-.form-container image{
+.form-container .image{
     height: 30rem;
+    width: 100%;
     
 }
 
+.post-editor input[type='submit']{
+    width:49%;
+}
 
 
 /*header*/
