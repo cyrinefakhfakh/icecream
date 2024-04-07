@@ -4,9 +4,54 @@ if (isset($_COOKIE['seller_id'])) {
 else{
     $seller_id='';
     header('location:loging.php');}
+if (isset($_POST['update'])) {
+    $product_id=$_POST['product_id'];
+    $product_id=filter_var($product_id,FILTER_SANITIZE_STRING);
     
+    $name=$_POST['name'];
+    $name=filter_var($name,FILTER_SANITIZE_STRING);
 
- 
+    $price=$_POST['price'];
+    $price=filter_var($price,FILTER_SANITIZE_STRING);
+
+    $description=$_POST['description'];
+    $description=filter_var($description,FILTER_SANITIZE_STRING);   
+
+    $stock=$_POST['stock'];
+    $stock=filter_var($stock,FILTER_SANITIZE_STRING);
+    $status=$_POST['status'];
+    $status=filter_var($status,FILTER_SANITIZE_STRING);
+
+    $update_product=$conn->prepare("UPDATE products SET name=?, price=?, product_detail=?, stock=?, status=? WHERE id=? ");
+    $update_product->execute([$name,$price,$description,$stock,$status,$product_id]);
+
+    $success_msg[]='product updated successfully';
+
+    $old_image=$_POST['old_image'];
+    $image=$_FILES['image']['name'];
+    $image=filter_var($image,FILTER_SANITIZE_STRING);
+    $img_size = $_FILES['image']['size'];
+    $img_tmp_name = $_FILES['image']['tmp_name'];
+    $image_folder = '../uploaded_files/' . $image;
+
+    $select_image=$conn->prepare("SELECT * FROM products WHERE image=? AND seller_id=?");
+    $select_image->execute([$image,$seller_id]);
+    if (!empty($image)){
+        if($image_size>20000000){
+            $warning_msg[]='image size is too large';
+    }elseif($select_image->rowCount()>0){
+        $warning_msg[]='image name repeated';
+    }else{
+        $update_image=$conn->prepare("UPDATE products SET image=? WHERE id=?");
+        $update_image->execute([$image,$product_id]);
+        move_uploaded_file($img_tmp_name,$image_folder);
+        if($old_image!=''){
+            unlink('../uploaded_files/'.$old_image);
+        }
+    $success_msg[]='image updated successfully';
+    }
+    }
+}
 
 ?>
 
@@ -38,7 +83,7 @@ else{
                        
                 ?>
                 <div class="form-container">
-                    <form action="" method="post" encrypte="multipart/form-data" class="register">
+                    <form action="" method="post" enctype="multipart/form-data" class="register">
                         <input type="hidden" name="old_image" value="<?= $fetch_product['image']; ?>">
                         <input type="hidden" name="product_id" value="<?= $fetch_product['id']; ?>">
                         <div class="input_field">
@@ -59,7 +104,7 @@ else{
                         </div>
                         <div class="input_field">
                             <p>product description<span>*</span></p>
-                            <textarea name="description" class="box"><?= $fetch_product['description']; ?></textarea>
+                            <textarea name="description" class="box"><?= $fetch_product['product_detail']; ?></textarea>
                         </div>
                         <div class="input_field">
                             <p>product stock<span>*</span></p>
@@ -104,9 +149,6 @@ else{
 
         </section>
     </div>
-
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script src="../js/admin_script.js"></script>

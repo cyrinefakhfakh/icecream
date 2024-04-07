@@ -3,8 +3,8 @@ if (isset($_COOKIE['seller_id'])) {
     $seller_id=$_COOKIE['seller_id'];}
 else{
     $seller_id='';
-    header('location:loging.php');}
-    $get_id=$_GET['post_id'];
+    header('location:login.php');}
+    $get_id=$_GET['id'];
    
     if(isset($_POST['delete'])){
         $p_id=$_POST['product_id'];
@@ -58,7 +58,7 @@ else{
                     <?php if($fetch_product['image']!=''){ ?>
                         <img src="../uploaded_files/<?= $fetch_product['image']; ?>" class="image">
                     <?php }?>
-                    <div class="price">$<?= $fetch_product['product_id']; ?>/-</div>
+                    <div class="price">$<?= $fetch_product['price']; ?>/-</div>
                     <div class="title"><?= $fetch_product['name']; ?></div>
                     <div class="content"> <?= $fetch_product['product_detail']; ?></div>
                     <div class="flex-btn">

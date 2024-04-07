@@ -358,7 +358,7 @@ header .right{
 .sidebar{
     background-color: var(--white-alpha-25);
     backdrop-filter:var(--backdrop-filter);
-    padding-top: 3rem;
+    padding-top: 2rem;
     width:18vw;
     height:100vh;
     position: sticky;
@@ -467,7 +467,7 @@ header .right{
         display:block;
     }
     .sidebar{
-        padding-top: 4rem;
+        padding-top: 3rem;
         position: fixed;
         width: 0;
         transition: .5s;
@@ -512,6 +512,12 @@ header .right{
     text-transform: capitalize;
     margin: 1rem 0;
 }
+.show-post .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    align-items: center;
+
+}
 .show-post .box-container .box {
     position: relative;
     overflow: hidden;
@@ -548,7 +554,8 @@ header .right{
 }
 .show-post .box-container .box  .status{
     position: absolute;
-    left: -40px;
+    left: 1%;
+    top: 1%;
     text-transform: uppercase ;
     font-size: 1rem;
     margin-bottom: 1rem;
@@ -628,12 +635,14 @@ header .right{
 .read-post form .title{
     font-size: 2.5rem;
     color: var(--main-color);
+    margin-top: 1.5rem;
     text-transform: uppercase;
     text-align: center;
 }
 .read-post form .content{
     font-size: 1.2rem;
     line-height: 2;
+    color:gray;
     padding: 1rem 0;
 }
 .read-post form .flex-btn{

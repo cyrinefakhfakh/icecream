@@ -3,7 +3,7 @@ if (isset($_COOKIE['seller_id'])) {
     $seller_id=$_COOKIE['seller_id'];}
 else{
     $seller_id='';
-    header('location:loging.php');}
+    header('location:login.php');}
     if(isset($_POST['delete'])){
         $p_id=$_POST['product_id'];
         $p_id=filter_var($p_id,FILTER_SANITIZE_STRING);
@@ -14,12 +14,7 @@ else{
         $success_msg[]='Product deleted successfully';
         
     }
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html >
