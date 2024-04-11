@@ -3,7 +3,7 @@ if (isset($_COOKIE['seller_id'])) {
     $seller_id=$_COOKIE['seller_id'];}
 else{
     $seller_id='';
-    header('location:login.php');}
+    header('location:loging.php');}
     $get_id=$_GET['id'];
    
     if(isset($_POST['delete'])){
