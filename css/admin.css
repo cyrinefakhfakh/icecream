@@ -21,11 +21,7 @@
 }
 body{
     background-image: url('../image/bg1.png');
-    background-size: cover;
-    
-
-    
-
+    background-position: center;
 }
 html{
     scroll-behavior: smooth;
@@ -103,7 +99,7 @@ input[type='submit']:hover{
     border:2px solid var(--white-alpha-40);
     backdrop-filter: var(--backdrop-filter);
     box-shadow: var(--box-shadow) ;
-    margin:1rem ;
+    margin: 1rem ;
     border-radius: .5rem;
 }
 
@@ -193,7 +189,7 @@ section,
 .form-container form .flex .col{
     flex:1 1 25rem;
 }
-.form-container .login{
+.form-container .loging{
     width:50rem;
 
 }
@@ -484,12 +480,7 @@ header .right{
         width:100%;
         }    }
 /*dashboard*/
-.dashboard .box-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
-    align-items: center;
-    
-}
+
 .dashboard .box-container .box{
     text-align: center;
     border-radius: .5rem;
@@ -521,6 +512,12 @@ header .right{
 .show-post .box-container .box {
     position: relative;
     overflow: hidden;
+    background-color: var(--white-alpha-25);
+    border:2px solid var(--white-alpha-40);
+    backdrop-filter: var(--backdrop-filter);
+    box-shadow: var(--box-shadow) ;
+    margin: 1rem ;
+    border-radius: .5rem;
 }
 .show-post .box-container .box:hover .image{
     transform: scale(1.1);
