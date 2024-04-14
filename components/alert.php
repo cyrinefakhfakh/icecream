@@ -10,6 +10,7 @@
             echo '<script>swal("'.$error_msg.'","","error");</script>';
         }
     }
+    
 
     if(isset($info_msg)){
         foreach($info_msg as $info_msg){
