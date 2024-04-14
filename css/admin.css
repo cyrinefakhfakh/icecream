@@ -478,8 +478,12 @@ header .right{
     }
     section{
         width:100%;
-        }    }
+
+        }   
+     }
+
 /*dashboard*/
+
 
 .dashboard .box-container .box{
     text-align: center;
@@ -507,8 +511,20 @@ header .right{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
     align-items: center;
+    
 
 }
+.show-post .box-container .box{
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white-alpha-25);
+    border:2px solid var(--white-alpha-40);
+    backdrop-filter: var(--backdrop-filter);
+    box-shadow: var(--box-shadow) ;
+    margin: 1rem ;
+    border-radius: .5rem;
+}
+
 .show-post .box-container .box {
     position: relative;
     overflow: hidden;
