@@ -26,6 +26,7 @@ else{
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
     </head>
 <body>
+
     <div class="main-container">
         <?php include '../components/admin_header.php'; ?>
         <section class="show-post">
@@ -83,6 +84,7 @@ else{
 
 
         </section>
+        
         
 
 </div>

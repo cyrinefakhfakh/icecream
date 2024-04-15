@@ -350,6 +350,7 @@ header .right{
 .main-container{
     display: flex;
     font-family: sans-serif;
+
 }
 .sidebar{
     background-color: var(--white-alpha-25);
@@ -507,6 +508,7 @@ header .right{
     text-transform: capitalize;
     margin: 1rem 0;
 }
+
 .show-post .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
