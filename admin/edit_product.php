@@ -52,6 +52,36 @@ if (isset($_POST['update'])) {
     }
     }
 }
+if (isset($_POST['delete_image'])) {
+    $product_id=$_POST['product_id'];
+    $product_id=filter_var($product_id,FILTER_SANITIZE_STRING);
+    
+    $delete_image=$conn->prepare("SELECT * FROM products WHERE id=?");
+    $delete_image->execute([$product_id]);
+    $fetch_delete_image=$delete_image->fetch(PDO::FETCH_ASSOC);
+    if ($fetch_delete_image['image']!='') {
+        unlink('../uploaded_files/'.$fetch_delete_image['image']);
+        $delete_image=$conn->prepare("UPDATE products SET image=? WHERE id=?");
+    
+    }
+    $unset_image=$conn->prepare("UPDATE products SET image=? WHERE id=?");
+    $unset_image->execute([$empty_image,$product_id]);  
+    $success_msg[]='image deleted successfully';  
+}
+if (isset($_POST['delete_product'])) {
+    $product_id=$_POST['product_id'];
+    $product_id=filter_var($product_id,FILTER_SANITIZE_STRING);
+    $delete_image=$conn->prepare("SELECT * FROM products WHERE id=?");
+    $delete_image->execute([$product_id]);
+    $fetch_delete_image=$delete_image->fetch(PDO::FETCH_ASSOC);
+    if ($fetch_delete_image['image']!='') {
+        unlink('../uploaded_files/'.$fetch_delete_image['image']);
+    }
+    $delete_product=$conn->prepare("DELETE FROM products WHERE id=?");
+    $delete_product->execute([$product_id]);
+    $success_msg[]='product deleted successfully';
+    header('location:view_product.php');
+}
 
 ?>
 
@@ -125,7 +155,7 @@ if (isset($_POST['update'])) {
 
                             <div class="flex-btn">
                                <input type="submit" name="update" class="btn" value="update product">
-                               <input type="submit" name="delete" class="btn" value="delete product">
+                               <input type="submit" name="delete_product" class="btn" value="delete product">
                             </div>
 
                     </form>

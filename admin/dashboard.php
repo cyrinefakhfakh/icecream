@@ -16,7 +16,7 @@ else{
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Blue Sky Summer registration</title>
+        <title>Blue Sky Summer Dashboard page</title>
         <link rel="stylesheet" type="text/css" href="../css/admin.css">
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
     </head>
@@ -30,7 +30,7 @@ else{
             </div>
             <div class="box-container">
                 <div class="box">
-                    <h1>Welcome !</h1>
+                    <h3>Welcome !</h3>
                     <p><?= $fetch_profile['name']; ?></p>
                     <a href="update.php" class="btn">update profile</a>
                 </div>
