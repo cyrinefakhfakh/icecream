@@ -323,7 +323,7 @@ header .right{
        
         transform: translateY(1rem);
     }}
-    .profile-detail .active{
+    .profile-detail.active{
         display: inline-block;
     }
     .profile-detail p{
@@ -634,6 +634,99 @@ header .right{
     height: 50px;
     margin-top: .8rem;
 }
+
+/*profile*/
+.seller-profile .details{
+    background-color: var(--white-alpha-25);
+    border:2px solid var(--white-alpha-40);
+    backdrop-filter: var(--backdrop-filter);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    border-radius: .5rem;
+    padding: 1rem;
+
+}
+.seller-profile .details seller{
+   margin-bottom: 2rem;
+}
+.seller-profile .details img{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: .5rem;
+    padding:.5rem;
+    background-color: var(--main-color);
+
+}
+.seller-profile .details .seller h3{
+    font-size: 1.5rem;
+    margin: .5rem;
+    text-transform: capitalize;
+    
+}
+.seller-profile .details .seller span{
+    font-size: 1.2rem;
+    display: block;    
+    color: gray;
+    margin-bottom: 2rem;
+    text-transform: capitalize;
+}
+.seller-profile .details .flex{
+    display: flex;
+    gap:1.5rem;
+    align-items: center;
+    margin:4rem 0;
+
+}
+
+.seller-profile .details .flex .box{
+    flex:1 1 26rem;
+    border-radius: .5rem;
+    background-color: #cccccc33;
+    padding: 2rem;
+}
+.seller-profile .details .flex .box span{
+   color:var(--main-color);
+   display: block;
+   margin-bottom: .5rem;
+    font-size: 2.5rem;
+    text-transform: capitalize;
+}
+.seller-profile .details .flex .box p{
+    font-size: 2rem;
+    color: #000;
+    padding: .5rem 0;
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*media screen*/
 @media screen and (max-width:991px) {
     .toggle-btn{
