@@ -85,7 +85,7 @@ input[type='submit']:hover{
 }
 .box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(20rem, 1fr));
     align-items: center;
 
 }
@@ -161,6 +161,7 @@ section,
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     min-height: 100vh;
     padding: 4% 0;
     position: relative;
@@ -199,7 +200,7 @@ section,
 .form-container .register .img-box img{
     width: 180px;
     height: 180px;
-    border-radius: 50px;
+    border-radius: 50%;
     text-align: center;
     padding: 10px;
     background-color: var(--main-color);
