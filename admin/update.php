@@ -85,10 +85,9 @@ if (isset($_POST['submit'])) {
             else{
                 $warning_msg[]='old password does not match';
             }
+            
         }
-        else{
-            $warning_msg[]='old password is required';
-        }
+       
     }
 
 

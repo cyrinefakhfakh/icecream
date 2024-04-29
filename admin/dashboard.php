@@ -16,7 +16,7 @@ else{
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Blue Sky Summer Dashboard page</title>
+        <title> Dashboard page</title>
         <link rel="stylesheet" type="text/css" href="../css/admin.css">
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
     </head>
@@ -73,7 +73,7 @@ else{
                     ?>
                     <h3><?= $number_of_deactive_products; ?></h3>
                     <p>total deactive products</p>
-                    <a href="view_product.php" class="btn">Deactive product</a>
+                    <a href="view_product.php" class="btn">Deactive </a>
                 </div>
                 <div class="box">
                     <?php
@@ -125,7 +125,7 @@ else{
                     ?>
                     <h3><?= $number_of_canceled_orders; ?></h3>
                     <p>total canceled placed</p>
-                    <a href="admin_order.php" class="btn">canceled orders</a>
+                    <a href="admin_order.php" class="btn">canceled </a>
                 </div>
 
             </div>
