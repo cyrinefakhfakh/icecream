@@ -1,5 +1,5 @@
 <?php
     include 'connect.php';
     setcookie('seller_id','',time()-1,'/');
-    header('location:../admin/loging.php');
+    header('location:../admin/login.php');
 ?>

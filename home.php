@@ -1,12 +1,12 @@
 <?php
-  include 'components/connect.php';
-  if(isset($_COOKIE['id'])){
-    $id=$_COOKIE['id'];
-  }
-  else{
-    $id='';
-    
-  }
+    include 'components/connect.php';
+    if(isset($_COOKIE['id'])){
+      $id=$_COOKIE['id'];
+    }
+    else{
+      $id='';
+      
+    }
 
 ?>
 
@@ -296,35 +296,11 @@
 
 
     </div>
-  <?php include 'components/footer.php'; ?>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<?php include 'components/footer.php'; ?>
 <script src="js/user_script.js"></script>
 <?php include 'components/alert.php'; ?>
     

@@ -16,10 +16,10 @@ if (isset($_POST['submit'])) {
     if($select_seller->rowCount()>0){
         setcookie('seller_id',$row['id'],time()+60*60*24*30,'/');
         header('location:dashboard.php');
+        $success_msg='login successful';
     }else{
         $warning_msg[]='invalid login details';
     }
-
 }
 
 ?>

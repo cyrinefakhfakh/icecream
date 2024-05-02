@@ -1,6 +1,6 @@
 <header>
     <div class="logo">
-        <img src="../image/logo.png" alt="logo" width="100">
+        <img src="../image/iceelogo.png" alt="logo" width="50">
     </div>
     <div class="right">
         <div class="bx bxs-user" id="user-btn"></div>
@@ -20,7 +20,7 @@
             <p><?= $fetch_profile['name']; ?></p>
             <div class="flex-btn">
                 <a href="profile.php" class="btn">Profile</a>
-                <a href="../components/logout.php" class="btn" onclick="return confirm('logout from this website?');" >Logout</a>
+                <a href="../components/admin_logout.php" class="btn" onclick="return confirm('logout from this website?');" >Logout</a>
 
             </div>
         </div>

@@ -21,7 +21,7 @@ $total_orders=$select_orders->rowCount();
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> seller profile</title>
+        <title> Seller profile</title>
         <link rel="stylesheet" type="text/css" href="../css/admin.css">
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
     </head>

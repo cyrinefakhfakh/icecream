@@ -34,17 +34,17 @@
                 <img src="uploaded_files/<?= $fetch_profile['image']; ?>">
                 <h3 style="margin-bottom: 1rem;"><?= $fetch_profile['name']; ?></h3>
                 <div class="flex-btn">
-                    <a href="profile.php" class="btn">View Profile</a>
-                    <a href="components.user_logout.php" onclick="return confirm('logout from this website');" class="btn">Logout</a>
+                    <a href="profile.php" class="btn">Profile</a>
+                    <a href="components\user_logout.php" onclick="return confirm('logout from this website');" class="btn">Logout</a>
                 </div>
-                    <?php } else { ?>
-                        <h3 style="margin-bottom: 1rem;">Please login or register</h3>
-                        <div class="flex-btn">
-                            <a href="login.php" class="btn">Login</a>
-                            <a href="register.php" class="btn">Register</a>
-                        </div>
-                    <?php } ?>          
-                    
+                <?php }else { ?>
+                    <h3 style="margin-bottom: 1rem;">Please login or register</h3>
+                    <div class="flex-btn">
+                        <a href="login.php" class="btn">Login</a>
+                        <a href="register.php" class="btn">Register</a>
+                    </div>
+                <?php } ?>          
+                        
                     
 
                 

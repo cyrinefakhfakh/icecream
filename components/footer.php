@@ -2,12 +2,12 @@
     <div class="content">
         <span>get latest updates </span>
         <h1>subscribe our newsletter</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi quod error dolores quibusdam delectus esse at assumenda libero sit deleniti doloremque quaerat voluptates quisquam nisi, consequuntur porro dolor optio explicabo!</p>
+        <p></p>
         <div class="input-field">
             <input type="email" placeholder="Enter your email address">
             <button class="btn">subscribe</button>
         </div>
-        <p>No ads , No trails,No commitment</p>
+        <p></p>
         <div class="box-container">
             <div class="box">
                 <div class="box-counter"><p class="counter">5000</p><i class="bx bx-plus"></i></div>
