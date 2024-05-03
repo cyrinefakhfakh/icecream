@@ -22,22 +22,26 @@ if (isset($_POST['submit'])) {
         if (!empty($name)) {
             $update_name=$conn->prepare("UPDATE sellers SET name=? WHERE id=?");
             $update_name->execute([$name,$seller_id]);
-            $success_msg='name updated successfully';
+            $success_msg[]='name updated successfully';
            
         }
         if (!empty($email)) {
             $select_email=$conn->prepare("SELECT * FROM sellers WHERE id=? and email=?");
             $select_email->execute([$email,$seller_id]);
-            if ($update_email->rowCount()>0) {
+            $email_domain = strtolower(substr(strrchr($email, "@"), 1)); // Extract domain from email
+            if (!in_array($email_domain, ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'protonmail.com', 'zoho.com', 'icloud.com', 'mail.com', 'yandex.com', 'gmx.com', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'gmail.com'])) {
+                $warning_msg[] = 'Email must have a valid Gmail domain';
+            } else {
+            if ($select_email->rowCount()>0) {
 
                 $warning_msg[]='email already exist';
             }
             else{
-                $update_email=$conn->prepare("UPDATE sellers SET email=? WHERE id=?");
-                $update_email->execute([$email,$seller_id]);
-                $success_msg='email updated successfully';
+                $select_email=$conn->prepare("UPDATE sellers SET email=? WHERE id=?");
+                $select_email->execute([$email,$seller_id]);
+                $success_msg[]='email updated successfully';
             }
-           
+        }
         }
         $image=$_FILES['image']['name'];
         $image= filter_var($image,FILTER_SANITIZE_STRING);
@@ -57,7 +61,7 @@ if (isset($_POST['submit'])) {
                 if ($prev_image!='default.jpg') {
                     unlink('../uploaded_files/'.$prev_image);
                 }
-                $success_msg='image updated successfully';
+                $success_msg[]='image updated successfully';
             }
         }
         $old_password=$_POST['old_password'];
@@ -72,7 +76,7 @@ if (isset($_POST['submit'])) {
                     if ($new_pass==$cpass) {
                         $update_pass=$conn->prepare("UPDATE sellers SET password=? WHERE id=?");
                         $update_pass->execute([sha1($new_pass),$seller_id]);
-                        $success_msg='password updated successfully';
+                        $success_msg[]='password updated successfully';
                     }
                     else{
                         $warning_msg[]='password does not match';

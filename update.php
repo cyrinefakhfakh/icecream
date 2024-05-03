@@ -1,88 +1,104 @@
 <?php
-include 'components/connect.php';
+    include 'components/connect.php';
 
 
-if(isset($_COOKIE['id'])){
-    $id=$_COOKIE['id'];
-} else {
-    $id='';
-}
-
-if (isset($_POST['submit'])) {
-    $select_user = $conn->prepare("SELECT * FROM users WHERE id=? LIMIT 1");
-    $select_user->execute([$id]);
-    $fetch_user = $select_user->fetch(PDO::FETCH_ASSOC);
-
-    $prev_pass = $fetch_user['password'];
-    $prev_image = $fetch_user['image'];
-
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-
-    // Validate email domain
-// Validate email domain
-$email_domain = strtolower(substr(strrchr($email, "@"), 1)); // Extract domain from email
-$allowed_domains = ['gmail.com', 'googlemail.com']; // Allowed Gmail domains
-
-if (!in_array($email_domain, $allowed_domains)) {
-    $warning_msg[] = 'Email must have a valid Gmail domain';
-} else {
-    if (!empty($name)) {
-        $update_name = $conn->prepare("UPDATE users SET name=? WHERE id=?");
-        $update_name->execute([$name, $id]);
-        $success_msg = 'Name updated successfully';
+    if(isset($_COOKIE['id'])){
+        $id=$_COOKIE['id'];
+    } else {
+        $id='';
     }
 
-    if (!empty($email)) {
-        $select_email = $conn->prepare("SELECT COUNT(*) FROM users WHERE email=? AND id<>?");
-        $select_email->execute([$email, $id]);
-        $email_count = $select_email->fetchColumn();
-
-        if ($email_count > 0) {
-            $warning_msg[] = 'Email already exists';
-        } else {
-            $update_email = $conn->prepare("UPDATE users SET email=? WHERE id=?");
-            $update_email->execute([$email, $id]);
-            $success_msg = 'Email updated successfully';
-        }
-    }
-}
-
-    // Image upload logic
-    if (!empty($_FILES['image']['name'])) {
-        $image = $_FILES['image'];
-        $image_folder = 'uploaded_files/';
-        $new_image_name = uniqid() . '_' . $image['name'];
-        move_uploaded_file($image['tmp_name'], $image_folder . $new_image_name);
+    if (isset($_POST['submit'])) {
+        $select_seller=$conn->prepare("SELECT * FROM users WHERE id=? LIMIT 1");
+        $select_seller->execute([$id]);
+    
+        $fetch_seller=$select_seller->fetch(PDO::FETCH_ASSOC);
+    
+        $prev_pass=$fetch_seller['password'];
+        $prev_image=$fetch_seller['image'];
+    
+        $name=$_POST['name'];
+        $name= filter_var($name,FILTER_SANITIZE_STRING);
+        $email=$_POST['email'];
+        $email= filter_var($email,FILTER_SANITIZE_EMAIL);
+    
         
-        $update_image = $conn->prepare("UPDATE users SET image=? WHERE id=?");
-        $update_image->execute([$new_image_name, $id]);
-        $success_msg = 'Image updated successfully';
-    }
-
-    // Password update logic
-    $old_password = filter_var($_POST['old_password'], FILTER_SANITIZE_STRING);
-    $new_pass = filter_var($_POST['new_pass'], FILTER_SANITIZE_STRING);
-    $cpass = sha1(filter_var($_POST['cpass'], FILTER_SANITIZE_STRING));
-
-    if (!empty($old_password)) {
-        if (sha1($old_password) == $prev_pass) {
-            if (!empty($new_pass)) {
-                if ($new_pass == $cpass) {
-                    $update_pass = $conn->prepare("UPDATE users SET password=? WHERE id=?");
-                    $update_pass->execute([sha1($new_pass), $id]);
-                    $success_msg = 'Password updated successfully';
-                } else {
-                    $warning_msg[] = 'Passwords do not match';
-                }
-            } else {
-                $warning_msg[] = 'New password is required';
+            if (!empty($name)) {
+                $update_name=$conn->prepare("UPDATE users SET name=? WHERE id=?");
+                $update_name->execute([$name,$id]);
+                $success_msg='name updated successfully';
+               
             }
-        } else {
-            $warning_msg[] = 'Old password does not match';
+            if (!empty($email)) {
+                $select_email=$conn->prepare("SELECT * FROM users WHERE id=? and email=?");
+                $select_email->execute([$email,$id]);
+                $email_domain = strtolower(substr(strrchr($email, "@"), 1)); // Extract domain from email
+            if (!in_array($email_domain, ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'protonmail.com', 'zoho.com', 'icloud.com', 'mail.com', 'yandex.com', 'gmx.com', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'gmail.com'])) {
+                $warning_msg[] = 'Email must have a valid Gmail domain';
+            } else {
+                if ($select_email->rowCount()>0) {
+    
+                    $error_msg[]='email already exist';
+                }
+                else{
+                    $select_email=$conn->prepare("UPDATE users SET email=? WHERE id=?");
+                    $select_email->execute([$email,$id]);
+                    $success_msg[]='Email updated successfully';
+                }
+               
+            }}
+            $image=$_FILES['image']['name'];
+            $image= filter_var($image,FILTER_SANITIZE_STRING);
+            $ext=pathinfo($image,PATHINFO_EXTENSION);
+            $rename=uniqid().'.'.$ext;
+            $image_size=$_FILES['image']['size'];
+            $image_tmp_name=$_FILES['image']['tmp_name'];
+            $image_folder='../uploaded_files/'.$rename;
+            if (!empty($image)) {
+                if ($image_size>5000000) {
+                    $error_msg[]='image size is too large';
+                }
+                else{
+                    $update_image=$conn->prepare("UPDATE users SET image=? WHERE id=?");
+                    $update_image->execute([$rename,$id]);
+                    move_uploaded_file($image_tmp_name,$image_folder);
+                    if ($prev_image!='default.jpg') {
+                        unlink('../uploaded_files/'.$prev_image);
+                    }
+                    $success_msg[]='image updated successfully';
+                }
+            }
+            $old_password=$_POST['old_password'];
+            $old_password= filter_var($old_password,FILTER_SANITIZE_STRING);
+            $new_pass=$_POST['new_pass'];
+            $new_pass= filter_var($new_pass,FILTER_SANITIZE_STRING);
+            $cpass=sha1($_POST['cpass']);
+            $cpass= filter_var($cpass,FILTER_SANITIZE_STRING);
+            if (!empty($old_password)) {
+                if (sha1($old_password)==$prev_pass) {
+                    if (!empty($new_pass)) {
+                        if ($new_pass==$cpass) {
+                            $update_pass=$conn->prepare("UPDATE users SET password=? WHERE id=?");
+                            $update_pass->execute([sha1($new_pass),$id]);
+                            $success_msg[]='password updated successfully';
+                        }
+                        else{
+                            $warning_msg[]='password does not match';
+                        }
+                    }
+                    else{
+                        $warning_msg[]='new password is required';
+                    }
+                }
+                else{
+                    $warning_msg[]='old password does not match';
+                }
+                
+            }
+           
         }
-    }
-}
+    
+    
 
 ?>
 
@@ -190,8 +206,9 @@ if (!in_array($email_domain, $allowed_domains)) {
 
 
 <script src="js/user_script.js"></script>
-<?php include 'components/alert.php'; ?>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<?php include 'components/footer.php'; ?>    
+<?php include 'components/footer.php'; ?>  
+<?php include 'components/alert.php'; ?>  
 </body>
 </html>

@@ -23,6 +23,10 @@ if (isset($_POST['submit'])) {
     $image_folder = '../uploaded_files/' . $rename;
     $select_seller=$conn->prepare("SELECT * FROM sellers WHERE email=?");
     $select_seller->execute([$email]);
+    $email_domain = strtolower(substr(strrchr($email, "@"), 1)); // Extract domain from email
+    if (!in_array($email_domain, ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'protonmail.com', 'zoho.com', 'icloud.com', 'mail.com', 'yandex.com', 'gmx.com', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'gmail.com'])) {
+        $warning_msg[] = 'Email must have a valid Gmail domain';
+    } else {
     if($select_seller->rowCount()>0){
         $warning_msg[]='Email already exists';
     }else{
@@ -47,7 +51,7 @@ if (isset($_POST['submit'])) {
             $error_msg[] = 'Passwords do not match';
     }
 }}
-
+}
 
 ?>
 
@@ -57,14 +61,14 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blue Sky Summer registration</title>
+    <title> Registration</title>
     <link rel="stylesheet" type="text/css" href="../css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
     <div class="form-container">
        <form action="" method="post" enctype="multipart/form-data" class="register">
-            <h3>register now</h3>
+            <h3>Register now</h3>
             <div class="flex">
                 <div class="col">
                     <div class="input-field">

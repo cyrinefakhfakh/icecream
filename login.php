@@ -8,7 +8,7 @@
         
     }
 
-    $warning_msg = []; // Initialize the $warning_msg array
+    
 
     if (isset($_POST['submit'])) {
         $email = $_POST['email'];
@@ -23,7 +23,7 @@
         if($select_seller->rowCount()>0){
                 setcookie('id',$row['id'],time()+60*60*24*30,'/');
                 header('location:home.php');
-                $success_msg='login successful';
+                $success_msg[]='login successful';
 
         }else{
                 $warning_msg[]='invalid login details';
@@ -107,8 +107,9 @@
 
 
 <script src="js/user_script.js"></script>
-<?php include 'components/alert.php'; ?>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<?php include 'components/footer.php'; ?>    
+<?php include 'components/footer.php'; ?>   
+<?php include 'components/alert.php'; ?> 
 </body>
 </html>

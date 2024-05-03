@@ -1,5 +1,4 @@
-<?php
-  include 'components/connect.php';
+<?php include 'components/connect.php';
   if(isset($_COOKIE['id'])){
     $id=$_COOKIE['id'];
   }
@@ -33,32 +32,25 @@
     $select_seller=$conn->prepare("SELECT * FROM users WHERE email=?");
     $select_seller->execute([$email]);
     $email_domain = strtolower(substr(strrchr($email, "@"), 1)); // Extract domain from email
-    if (!in_array($email_domain, ['gmail.com', 'googlemail.com'])) {
+    if (!in_array($email_domain, ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'protonmail.com', 'zoho.com', 'icloud.com', 'mail.com', 'yandex.com', 'gmx.com', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'mailbox.org', 'tutanota.com', 'disroot.org', 'riseup.net', 'mailbox.org', 'kolabnow.com', 'posteo.de', 'gmail.com'])) {
         $warning_msg[] = 'Email must have a valid Gmail domain';
     } else {if($select_seller->rowCount()>0){
         $warning_msg[]='Email already exists';
     }else{
-        if ($pass == $cpass) {
-            if ($ext == 'jpg' || $ext == 'png' || $ext == 'jpeg') {
-                if ($image_size < 5000000) {
-                    $insert_seller = $conn->prepare("INSERT INTO users(id,name,email,password,image) VALUES(?,?,?,?,?)");
-                    $insert_seller->execute([$id, $name, $email, $cpass, $rename]);
-                    if ($insert_seller) {
-                        move_uploaded_file($image_tmp_name, $image_folder );
-                        $success_msg[] = 'Registration successful';
-                    } else {
-                        $warning_msg[] = 'Registration failed';
-                    }
-                } else {
-                    $warning_msg[] = 'Image size too large';
-                }
+        if ($pass != $cpass) {
+            
+            $warning_msg[] = 'Passwords do not match';}
+            elseif ($image_size > 1000000) {
+                $warning_msg[] = 'Image size is too large';
             } else {
-                $warning_msg[] = 'Invalid image format';
+                $insert_seller = $conn->prepare("INSERT INTO users(id,name,email,password,image) VALUES(?,?,?,?,?)");
+                $insert_seller->execute([$id, $name, $email, $pass, $rename]);
+                move_uploaded_file($image_tmp_name, $image_folder);
+                $success_msg[] = 'Registration successful';
             }
-        } else {
-            $warning_msg[] = 'Passwords do not match';
-    }
-    }}}
+        }
+    
+    }}
 
 
 ?>
@@ -156,8 +148,8 @@
 
 
 <script src="js/user_script.js"></script>
-<?php include 'components/alert.php'; ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<?php include 'components/footer.php'; ?>    
+<?php include 'components/footer.php'; ?>  
+<?php include 'components/alert.php'; ?>  
 </body>
 </html>
