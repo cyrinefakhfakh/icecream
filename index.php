@@ -1,3 +1,37 @@
+<?php
+    include 'components/connect.php';
+    if(isset($_COOKIE['id'])){
+        $id=$_COOKIE['id'];
+    }
+    else{
+        $id='';
+        
+    }
+
+
+    if (isset($_POST['submit'])) {
+        $email = $_POST['email'];
+        $email=filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        $pass = $_POST['pass'];
+        $pass =filter_var($pass, FILTER_SANITIZE_STRING);
+
+        $select_seller=$conn->prepare("SELECT * FROM users WHERE email=? AND password=?");
+        $select_seller->execute([$email,$pass]);
+        $row=$select_seller->fetch(PDO::FETCH_ASSOC);
+        if($select_seller->rowCount()>0){
+                setcookie('id',$row['id'],time()+60*60*24*30,'/');
+                header('location:home.php');
+                $success_msg[]='login successful';
+
+        }else{
+                $warning_msg[]='invalid login details';
+        }
+    }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
