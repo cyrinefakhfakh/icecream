@@ -1,7 +1,7 @@
 <?php
   include 'components/connect.php';
   if(isset($_COOKIE['id'])){
-    $id=$_COOKIE['id'];
+     $id=$_COOKIE['id'];
   }
   else{
     $id='';
